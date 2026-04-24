@@ -1,0 +1,22 @@
+databases:
+- name: mysite  
+  databaseName: mysite
+  user: mysite
+  plan: free
+
+services:
+- type: web
+  name: mysite
+  runtime: ruby
+  plan: free
+  buildComand: "./bin/render-build.sh"
+  # preDeployCommand: "bundle exec rails db:migrate" # preDepoyCommand only available on paid instance types
+  startCommand: "bundle exec rails server"
+  envVars:
+  - keys: DATABASES_URL
+    fromDatabase:
+      name: mysite
+      property: connectioString
+  - keys: RAILS_MASTER_KEY
+    sync:fals- key: WEB_CONCURRENCY
+    value: 2 # sensible default

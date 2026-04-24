@@ -25,17 +25,17 @@ user3 = User.create!(
   encrypted_password: "password123",
   first_name: "Clara",
   last_name: "Diallo",
-  description: "Organisatrice d'événements à Dakar"
+  description: "Organisatrice d'evenements à Dakar"
 )
 
-# Création de quelques événements
+# Creation de quelques evenements
 event1 = Event.create!(
   title: "Concert Jazz à Dakar",
   description: "Un magnifique concert de jazz en plein air au coeur de Dakar. Venez nombreux profiter de cette soirée inoubliable.",
   start_date: DateTime.now + 10.days,
   duration: 120,
   price: 15,
-  location: "Place de l'Indépendance, Dakar",
+  location: "Place de l'Independance, Dakar",
   user: user1
 )
 
@@ -45,10 +45,10 @@ event2 = Event.create!(
   start_date: DateTime.now + 5.days,
   duration: 180,
   price: 5,
-  location: "Stade Léopold Sédar Senghor, Dakar",
+  location: "Stade Leopold Sedar Senghor, Dakar",
   user: user2
 )
 
-puts "Seed terminé !"
-puts "#{User.count} utilisateurs créés"
-puts "#{Event.count} événements créés"
+puts "Seed termine !"
+puts "#{User.count} utilisateurs crees"
+puts "#{Event.count} événements crees"
