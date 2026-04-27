@@ -1,0 +1,12 @@
+<h1>Bonne nouvelle <%= @creator.first_name %> !</h1>
+
+<p>
+  <strong><%= @participant.first_name %> <%= @participant.last_name %></strong>
+  vient de rejoindre ton événement :
+</p>
+
+<h2><%= @event.title %></h2>
+<p>Date : <%= @event.start_date.strftime("%d/%m/%Y à %Hh%M") %></p>
+<p>Lieu : <%= @event.location %></p>
+
+<p>À bientôt !</p>

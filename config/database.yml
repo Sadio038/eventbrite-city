@@ -1,3 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: eventbrite_city_development
+
+test:
+  <<: *default
+  database: eventbrite_city_test
+
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
