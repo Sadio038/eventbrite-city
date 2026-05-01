@@ -1,0 +1,28 @@
+<div class="jumbotron p-5 mb-4 bg-light rounded-3">
+  <h1 class="display-4">Événements à Dakar 🎉</h1>
+  <p class="lead">Découvrez les meilleurs événements de votre ville !</p>
+  <a href="<%= new_event_path %>" class="btn btn-primary btn-lg">Créer un événement</a>
+</div>
+
+<div class="row">
+  <% @events.each do |event| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= event.title %></h5>
+          <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+          <ul class="list-unstyled">
+            <li>📅 <%= event.start_date.strftime("%d/%m/%Y à %Hh%M") %></li>
+            <li>⏱ <%= event.duration %> minutes</li>
+            <li>📍 <%= event.location %></li>
+            <li>💰 <%= event.price %> €</li>
+            <li>👥 <%= event.attendances.count %> participants</li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="<%= event_path(event) %>" class="btn btn-outline-primary">Voir l'événement</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

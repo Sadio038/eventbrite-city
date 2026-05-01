@@ -85,4 +85,5 @@ config.action_mailer.mailjet_settings = {
   secret_key: '99ceaf84eb188c1c034bc8c07de1c678'
 }
 config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 end

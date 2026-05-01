@@ -57,3 +57,5 @@ group :test do
 end
 
 gem 'mailjet'
+
+gem 'devise'
