@@ -8,6 +8,13 @@
   <% @events.each do |event| %>
     <div class="col-md-4 mb-4">
       <div class="card h-100">
+        <% if event.cover.attached? %>
+          <%= image_tag event.cover, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+        <% else %>
+          <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+            <span style="font-size: 48px;">🎉</span>
+          </div>
+        <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= event.title %></h5>
           <p class="card-text"><%= truncate(event.description, length: 100) %></p>
@@ -15,7 +22,7 @@
             <li>📅 <%= event.start_date.strftime("%d/%m/%Y à %Hh%M") %></li>
             <li>⏱ <%= event.duration %> minutes</li>
             <li>📍 <%= event.location %></li>
-            <li>💰 <%= event.price %> €</li>
+            <li>💰 <%= event.is_free? ? "Gratuit" : "#{event.price} €" %></li>
             <li>👥 <%= event.attendances.count %> participants</li>
           </ul>
         </div>

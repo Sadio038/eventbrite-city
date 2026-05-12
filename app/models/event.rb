@@ -2,10 +2,11 @@ class Event < ApplicationRecord
   belongs_to :user
   has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :user
+  has_one_attached :cover
 
   validates :title, presence: true, length: { minimum: 5, maximum: 140 }
   validates :description, presence: true, length: { minimum: 20, maximum: 1000 }
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 1000 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1000 }
   validates :location, presence: true
   validates :duration, presence: true, numericality: { greater_than: 0 }
   validates :start_date, presence: true
@@ -15,6 +16,10 @@ class Event < ApplicationRecord
 
   # Valide que la date n'est pas dans le passé
   validate :start_date_cannot_be_in_the_past
+
+  def is_free?
+    price == 0
+  end
 
   private
 

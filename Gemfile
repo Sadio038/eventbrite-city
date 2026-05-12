@@ -59,3 +59,6 @@ end
 gem 'mailjet'
 
 gem 'devise'
+
+gem 'stripe'
+gem 'dotenv-rails', groups: [:development, :test]

@@ -1,13 +1,24 @@
 <div class="row">
   <div class="col-md-4">
     <div class="card">
-      <div class="card-body">
-        <h3 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h3>
+      <div class="card-body text-center">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: "rounded-circle mb-3", style: "width: 120px; height: 120px; object-fit: cover;" %>
+        <% else %>
+          <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 120px; height: 120px;">
+            <span class="text-white" style="font-size: 48px;">👤</span>
+          </div>
+        <% end %>
+
+        <h3><%= @user.first_name %> <%= @user.last_name %></h3>
         <p class="text-muted"><%= @user.email %></p>
         <p><%= @user.description %></p>
         <hr>
-        <a href="<%= edit_user_registration_path %>" class="btn btn-outline-secondary btn-sm">
-          Modifier email / mot de passe
+        <a href="<%= edit_user_path(@user) %>" class="btn btn-outline-primary btn-sm d-block mb-2">
+          ✏️ Modifier mon profil
+        </a>
+        <a href="<%= edit_user_registration_path %>" class="btn btn-outline-secondary btn-sm d-block">
+          🔒 Modifier email / mot de passe
         </a>
       </div>
     </div>
@@ -25,7 +36,7 @@
               <h6 class="mb-1"><%= event.title %></h6>
               <small><%= event.start_date.strftime("%d/%m/%Y") %></small>
             </div>
-            <small class="text-muted">📍 <%= event.location %> — 💰 <%= event.price %> €</small>
+            <small class="text-muted">📍 <%= event.location %> — 💰 <%= event.is_free? ? "Gratuit" : "#{event.price} €" %></small>
           </a>
         <% end %>
       </div>

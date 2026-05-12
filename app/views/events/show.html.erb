@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-md-8">
     <h1><%= @event.title %></h1>
+    <% if @event.cover.attached? %>
+      <%= image_tag @event.cover, class: "img-fluid rounded mb-3", style: "max-height: 400px; width: 100%; object-fit: cover;" %>
+    <% end %>
     <p class="text-muted">Créé par <%= @event.user.email %></p>
     <hr>
     <p><%= @event.description %></p>
@@ -17,8 +20,29 @@
           <li class="mb-2">👥 <strong>Participants :</strong> <%= @event.attendances.count %></li>
         </ul>
         <hr>
-        <% if user_signed_in? && current_user == @event.user %>
-          <a href="<%= edit_event_path(@event) %>" class="btn btn-outline-secondary btn-sm">Modifier l'événement</a>
+
+        <% if user_signed_in? %>
+          <% if current_user == @event.user %>
+            <!-- Le créateur voit le lien vers la liste des invités -->
+            <a href="<%= event_attendances_path(@event) %>" class="btn btn-outline-secondary btn-sm d-block mb-2">
+              👥 Mon espace événement
+            </a>
+        <% else %>
+          <!-- Peut rejoindre -->
+          <% if @event.is_free? %>
+          <a href="<%= new_event_attendance_path(@event) %>" class="btn btn-success btn-lg d-block">
+            🎉 Rejoindre gratuitement
+          </a>
+        <% else %>
+          <a href="<%= new_event_attendance_path(@event) %>" class="btn btn-primary btn-lg d-block">
+            Rejoindre l'événement — <%= @event.price %> €
+          </a>
+          <% end %>
+        <% end %>
+        <% else %>
+          <a href="<%= new_user_session_path %>" class="btn btn-outline-primary d-block">
+            Connectez-vous pour rejoindre
+          </a>
         <% end %>
       </div>
     </div>

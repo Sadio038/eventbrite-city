@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2>👥 Liste des invités — <%= @event.title %></h2>
+    <hr>
+
+    <% if @event.attendances.empty? %>
+      <p class="text-muted">Aucun participant pour le moment.</p>
+    <% else %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Stripe ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @attendances.each do |attendance| %>
+            <tr>
+              <td><%= attendance.user.first_name %></td>
+              <td><%= attendance.user.last_name %></td>
+              <td><%= attendance.user.email %></td>
+              <td><%= attendance.stripe_customer_id %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Gérer l'événement</h5>
+        <a href="<%= edit_event_path(@event) %>" class="btn btn-outline-secondary d-block mb-2">
+          ✏️ Modifier l'événement
+        </a>
+        <%= button_to "🗑️ Supprimer l'événement", event_path(@event),
+            method: :delete,
+            class: "btn btn-danger d-block w-100",
+            form: { data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet événement ?" } } %>
+      </div>
+    </div>
+  </div>
+</div>
