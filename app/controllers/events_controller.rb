@@ -4,10 +4,16 @@ class EventsController < ApplicationController
   before_action :correct_user!, only: [:edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = Event.where(validated: true)
   end
 
   def show
+    @event = Event.find(params[:id])
+    if @event.pending? && current_user != @event.user
+      redirect_to root_path, alert: "Cet événement est en attente de validation."
+    elsif @event.rejected?
+      redirect_to root_path, alert: "Cet événement a été refusé."
+    end
   end
 
   def new
@@ -17,8 +23,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user
+    @event.validated = nil
     if @event.save
-      redirect_to event_path(@event), notice: "Événement créé avec succès !"
+      redirect_to event_path(@event), notice: "Événement créé ! Il est en attente de validation."
     else
       render :new, status: :unprocessable_entity
     end

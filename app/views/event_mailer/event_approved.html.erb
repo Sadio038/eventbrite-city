@@ -1,0 +1,11 @@
+<h1>Bonne nouvelle <%= @user.first_name %> ! 🎉</h1>
+
+<p>Votre événement a été validé et est maintenant en ligne sur EventBrite City !</p>
+
+<h2><%= @event.title %></h2>
+<p>📅 Date : <%= @event.start_date.strftime("%d/%m/%Y à %Hh%M") %></p>
+<p>📍 Lieu : <%= @event.location %></p>
+<p>💰 Prix : <%= @event.is_free? ? "Gratuit" : "#{@event.price} €" %></p>
+
+<p>Les participants peuvent maintenant rejoindre votre événement !</p>
+<p>À bientôt !</p>

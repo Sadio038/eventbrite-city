@@ -1,0 +1,35 @@
+<h2>⏳ Événements en attente de validation</h2>
+<hr>
+
+<% if @pending_events.empty? %>
+  <div class="alert alert-success">
+    Aucun événement en attente de validation ! 🎉
+  </div>
+<% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Créateur</th>
+        <th>Date</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_events.each do |event| %>
+        <tr>
+          <td><%= event.title %></td>
+          <td><%= event.user.email %></td>
+          <td><%= event.start_date.strftime("%d/%m/%Y") %></td>
+          <td><%= event.is_free? ? "Gratuit" : "#{event.price} €" %></td>
+          <td>
+            <a href="<%= admin_event_submission_path(event) %>" class="btn btn-outline-primary btn-sm">
+              Voir
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

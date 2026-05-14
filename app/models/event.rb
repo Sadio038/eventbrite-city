@@ -11,14 +11,23 @@ class Event < ApplicationRecord
   validates :duration, presence: true, numericality: { greater_than: 0 }
   validates :start_date, presence: true
 
-  # Valide que la duration est un multiple de 5
   validate :duration_must_be_multiple_of_five
-
-  # Valide que la date n'est pas dans le passé
   validate :start_date_cannot_be_in_the_past
 
   def is_free?
     price == 0
+  end
+
+  def pending?
+    validated.nil?
+  end
+
+  def approved?
+    validated == true
+  end
+
+  def rejected?
+    validated == false
   end
 
   private

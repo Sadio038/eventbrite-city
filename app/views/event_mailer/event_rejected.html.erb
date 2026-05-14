@@ -1,0 +1,10 @@
+<h1>Bonjour <%= @user.first_name %></h1>
+
+<p>Nous sommes désolés, votre événement n'a pas été validé par nos administrateurs.</p>
+
+<h2><%= @event.title %></h2>
+<p>📅 Date : <%= @event.start_date.strftime("%d/%m/%Y à %Hh%M") %></p>
+<p>📍 Lieu : <%= @event.location %></p>
+
+<p>N'hésitez pas à créer un nouvel événement en tenant compte de nos conditions.</p>
+<p>À bientôt !</p>

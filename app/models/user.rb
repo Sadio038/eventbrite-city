@@ -16,3 +16,7 @@ class User < ApplicationRecord
     UserMailer.welcome_email(self).deliver_now
   end
 end
+
+def is_admin?
+  is_admin == true
+end
