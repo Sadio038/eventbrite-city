@@ -1,0 +1,18 @@
+<div class="bg-primary text-white py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold">Découvrez les meilleurs événements de Dakar 🎉</h1>
+        <p class="lead mb-4">Concerts, sports, conférences, ateliers... Trouvez l'événement qui vous correspond et rejoignez la communauté EventFreeka !</p>
+        <div class="d-flex gap-3 justify-content-center">
+          <a href="<%= root_path %>" class="btn btn-light btn-lg fw-bold">Voir les événements</a>
+          <% if user_signed_in? %>
+            <a href="<%= new_event_path %>" class="btn btn-outline-light btn-lg">Créer un événement</a>
+          <% else %>
+            <a href="<%= new_user_registration_path %>" class="btn btn-outline-light btn-lg">Rejoindre EventFreeka</a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

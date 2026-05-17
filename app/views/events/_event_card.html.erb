@@ -1,0 +1,27 @@
+<div class="col-md-4 mb-4">
+  <div class="card h-100 shadow-sm">
+    <% if event.cover.attached? %>
+      <%= image_tag event.cover, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+    <% else %>
+      <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+        <span style="font-size: 48px;">🎉</span>
+      </div>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title fw-bold"><%= event.title %></h5>
+      <p class="card-text text-muted small"><%= truncate(event.description, length: 100) %></p>
+      <ul class="list-unstyled small">
+        <li>📅 <%= event.start_date.strftime("%d/%m/%Y à %Hh%M") %></li>
+        <li>⏱ <%= event.duration %> minutes</li>
+        <li>📍 <%= event.location %></li>
+        <li>👥 <%= event.attendances.count %> participants</li>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <span class="fw-bold <%= event.is_free? ? 'text-success' : 'text-primary' %>">
+        <%= event.is_free? ? "Gratuit" : "#{event.price} €" %>
+      </span>
+      <a href="<%= event_path(event) %>" class="btn btn-primary btn-sm">Voir l'événement</a>
+    </div>
+  </div>
+</div>

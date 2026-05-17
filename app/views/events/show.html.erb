@@ -1,50 +1,36 @@
-<div class="row">
-  <div class="col-md-8">
-    <h1><%= @event.title %></h1>
-    <% if @event.cover.attached? %>
-      <%= image_tag @event.cover, class: "img-fluid rounded mb-3", style: "max-height: 400px; width: 100%; object-fit: cover;" %>
-    <% end %>
-    <p class="text-muted">Créé par <%= @event.user.email %></p>
-    <hr>
-    <p><%= @event.description %></p>
+<!-- Bannière secondaire -->
+<div class="bg-light border-bottom py-3 mb-4">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1">
+        <li class="breadcrumb-item"><a href="<%= root_path %>">Accueil</a></li>
+        <li class="breadcrumb-item active"><%= @event.title %></li>
+      </ol>
+    </nav>
+    <h2 class="fw-bold mb-0">🎪 <%= @event.title %></h2>
+    <p class="text-muted mt-1">📅 <%= @event.start_date.strftime("%d/%m/%Y") %> · 📍 <%= @event.location %></p>
   </div>
+</div>
 
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <ul class="list-unstyled">
-          <li class="mb-2">📅 <strong>Début :</strong> <%= @event.start_date.strftime("%d/%m/%Y à %Hh%M") %></li>
-          <li class="mb-2">⏱ <strong>Durée :</strong> <%= @event.duration %> minutes</li>
-          <li class="mb-2">📍 <strong>Lieu :</strong> <%= @event.location %></li>
-          <li class="mb-2">💰 <strong>Prix :</strong> <%= @event.price %> €</li>
-          <li class="mb-2">👥 <strong>Participants :</strong> <%= @event.attendances.count %></li>
-        </ul>
-        <hr>
-
-        <% if user_signed_in? %>
-          <% if current_user == @event.user %>
-            <!-- Le créateur voit le lien vers la liste des invités -->
-            <a href="<%= event_attendances_path(@event) %>" class="btn btn-outline-secondary btn-sm d-block mb-2">
-              👥 Mon espace événement
-            </a>
-        <% else %>
-          <!-- Peut rejoindre -->
-          <% if @event.is_free? %>
-          <a href="<%= new_event_attendance_path(@event) %>" class="btn btn-success btn-lg d-block">
-            🎉 Rejoindre gratuitement
-          </a>
-        <% else %>
-          <a href="<%= new_event_attendance_path(@event) %>" class="btn btn-primary btn-lg d-block">
-            Rejoindre l'événement — <%= @event.price %> €
-          </a>
-          <% end %>
-        <% end %>
-        <% else %>
-          <a href="<%= new_user_session_path %>" class="btn btn-outline-primary d-block">
-            Connectez-vous pour rejoindre
-          </a>
-        <% end %>
+<div class="container mb-5">
+  <div class="row g-4">
+    <!-- Image + description -->
+    <div class="col-md-8">
+      <% if @event.cover.attached? %>
+        <%= image_tag @event.cover, class: "img-fluid rounded shadow mb-4",
+            style: "width: 100%; height: 400px; object-fit: cover;" %>
+      <% end %>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="fw-bold mb-3">📝 Description</h5>
+          <p class="text-muted"><%= @event.description %></p>
+        </div>
       </div>
+    </div>
+
+    <!-- Infos + actions -->
+    <div class="col-md-4">
+      <%= render 'events/event_info' %>
     </div>
   </div>
 </div>

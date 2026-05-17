@@ -1,0 +1,40 @@
+<footer class="bg-dark text-white mt-5 py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">🎪 EventFreeka</h5>
+        <p class="text-muted">La plateforme d'événements de Dakar. Créez, rejoignez et vivez des expériences inoubliables.</p>
+        <div class="d-flex gap-2">
+          <a href="#" class="btn btn-outline-light btn-sm">📘</a>
+          <a href="#" class="btn btn-outline-light btn-sm">🐦</a>
+          <a href="#" class="btn btn-outline-light btn-sm">📸</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h6 class="fw-bold mb-3">Navigation</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="<%= root_path %>" class="text-muted text-decoration-none">Accueil</a></li>
+          <% if user_signed_in? %>
+            <li class="mb-2"><a href="<%= new_event_path %>" class="text-muted text-decoration-none">Créer un événement</a></li>
+            <li class="mb-2"><a href="<%= user_path(current_user) %>" class="text-muted text-decoration-none">Mon profil</a></li>
+          <% else %>
+            <li class="mb-2"><a href="<%= new_user_registration_path %>" class="text-muted text-decoration-none">S'inscrire</a></li>
+            <li class="mb-2"><a href="<%= new_user_session_path %>" class="text-muted text-decoration-none">Se connecter</a></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6 class="fw-bold mb-3">Contact</h6>
+        <ul class="list-unstyled text-muted">
+          <li class="mb-2">📍 Dakar, Sénégal</li>
+          <li class="mb-2">📧 contact@eventfreeka.com</li>
+          <li class="mb-2">📞 +221 77 000 00 00</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-secondary mt-4">
+    <div class="text-center text-muted">
+      <small>© 2026 EventFreeka — Tous droits réservés</small>
+    </div>
+  </div>
+</footer>
